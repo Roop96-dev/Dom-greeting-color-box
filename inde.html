@@ -1,0 +1,114 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DOM Color Boxes</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background: #fff;
+        padding: 25px;
+        width: 420px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      .boxes {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .box {
+        padding: 25px;
+        background: #ddd;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .box:hover {
+        transform: scale(1.05);
+      }
+
+      input {
+        padding: 10px;
+        width: 65%;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        padding: 10px 15px;
+        margin-left: 5px;
+        border: none;
+        border-radius: 6px;
+        background: #007bff;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 id="heading">Hello</h1>
+
+      <div class="boxes">
+        <div class="box" data-color="red">Red</div>
+        <div class="box" data-color="blue">Blue</div>
+        <div class="box" data-color="green">Green</div>
+        <div class="box" data-color="yellow">Yellow</div>
+      </div>
+
+      <input type="text" id="name" placeholder="Enter your name" />
+      <button id="btn">Greet</button>
+    </div>
+
+    <script>
+      // DOM: Change greeting text
+      const button = document.getElementById("btn");
+      const input = document.getElementById("name");
+      const heading = document.getElementById("heading");
+
+      button.addEventListener("click", function () {
+        const userName = input.value;
+        heading.textContent = "Hello, " + userName;
+      });
+
+      // DOM: Fill box color on click
+      const boxes = document.querySelectorAll(".box");
+
+      boxes.forEach(function (box) {
+        box.addEventListener("click", function () {
+          const color = box.getAttribute("data-color");
+          box.style.backgroundColor = color;
+          box.style.color = "#fff";
+        });
+      });
+    </script>
+  </body>
+</html>
