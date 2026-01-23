@@ -4,111 +4,81 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>DOM Color Boxes</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dom Implementation</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
-        background: #f0f2f5;
+        margin: 0;
+        padding: 0;
         display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #header {
+        width: 100%;
+        height: 70px;
+        background-color: lightgrey;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        margin: 0;
+        gap: 20px;
+        height: calc(100vh - 160px);
       }
-
-      .container {
-        background: #fff;
-        padding: 25px;
-        width: 420px;
-        text-align: center;
-        border-radius: 10px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      .box-container {
+        display: flex;
+        gap: 20px;
       }
-
-      h1 {
-        margin-bottom: 20px;
-      }
-
-      .boxes {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-bottom: 20px;
-      }
-
       .box {
-        padding: 25px;
-        background: #ddd;
-        border-radius: 8px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.2s;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
       }
-
-      .box:hover {
-        transform: scale(1.05);
-      }
-
-      input {
-        padding: 10px;
-        width: 65%;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-      }
-
-      button {
-        padding: 10px 15px;
-        margin-left: 5px;
-        border: none;
-        border-radius: 6px;
-        background: #007bff;
-        color: #fff;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background: #0056b3;
+      .form-row {
+        display: flex;
+        gap: 8px;
       }
     </style>
   </head>
-
   <body>
-    <div class="container">
-      <h1 id="heading">Hello</h1>
+    <header id="header">
+      <h1 id="greeting">Hello</h1>
+    </header>
 
-      <div class="boxes">
-        <div class="box" data-color="red">Red</div>
-        <div class="box" data-color="blue">Blue</div>
-        <div class="box" data-color="green">Green</div>
-        <div class="box" data-color="yellow">Yellow</div>
+    <main>
+      <div class="box-container">
+        <div class="box red">Red</div>
+        <div class="box blue">Blue</div>
+        <div class="box green">Green</div>
+        <div class="box yellow">Yellow</div>
       </div>
 
-      <input type="text" id="name" placeholder="Enter your name" />
-      <button id="btn">Greet</button>
-    </div>
-
-    <script>
-      // DOM: Change greeting text
-      const button = document.getElementById("btn");
-      const input = document.getElementById("name");
-      const heading = document.getElementById("heading");
-
-      button.addEventListener("click", function () {
-        const userName = input.value;
-        heading.textContent = "Hello, " + userName;
-      });
-
-      // DOM: Fill box color on click
-      const boxes = document.querySelectorAll(".box");
-
-      boxes.forEach(function (box) {
-        box.addEventListener("click", function () {
-          const color = box.getAttribute("data-color");
-          box.style.backgroundColor = color;
-          box.style.color = "#fff";
-        });
-      });
-    </script>
+      <div class="form-row">
+        <input type="text" id="username" placeholder="Enter your name" />
+        <button>Greet</button>
+      </div>
+    </main>
   </body>
+  <script>
+    document.querySelector("button").addEventListener("click", function () {
+      document.getElementById("greeting").innerText =
+        document.getElementById("username").value.trim() === "" ?
+          "Hello"
+        : "Hello, " + document.getElementById("username").value;
+    });
+    document.querySelectorAll(".box").forEach(function (el) {
+      el.addEventListener("click", function () {
+        this.style.backgroundColor = this.innerText.toLowerCase();
+        this.style.color = "white";
+      });
+    });
+  </script>
 </html>
